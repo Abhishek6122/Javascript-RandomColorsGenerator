@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Colors</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        transition: .3s ease-in-out;
+    }
+    main{
+        width: 500px;
+        background: #ecf0f1;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
+        margin: auto;
+        margin-top: 200px;
+        font-size: 20px;
+        border-radius: 50px 0;
+        font-family: sans-serif;
+        letter-spacing: 3px;
+        text-align: center;
+        padding: 20px 10px;
+        cursor: default;
+        position: relative;
+    }
+    main .copyimg{
+        width: 30px;
+        height: 30px;
+        padding: 2px;
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        object-fit: cover;
+        object-position: center;
+        cursor: pointer;
+    }
+    main .copyimg:active{
+        box-shadow: 0 2px 3px rgba(0, 0, 0, .5);
+    }
+    main button{
+        font-size: 40px;
+        letter-spacing: 3px;
+        padding: 10px 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        cursor: pointer;
+        margin-top: 40px;
+        outline: none;
+        border: none;
+        color: ghostwhite;
+        background: #222f3e;
+        border-radius: 10px;
+        position: relative;
+    }
+    main button:active{
+        box-shadow: 0 0 10px #222f3e;
+        transform: scale(1.03);
+    }
+    main span{
+        position: absolute;
+        background: black;
+        color: ghostwhite;
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: 20px;
+        right: -10px;
+        top: -20px;
+        pointer-events: none;
+        opacity: 0;
+        transition: .3s;
+    }
+    .span_2{
+        opacity: 1;
+        transition: .3s;
+    }
+</style>
+<body>
+    <main>
+        <img src="https://cdn-icons-png.flaticon.com/512/126/126498.png" alt="Error" onclick="copyColor()" class="copyimg">
+        <span>Copied</span>
+        <h1 class="showColor"></h1>
+        <button onclick="randomColor()">Generate</button>
+    </main>
+    <script>
+        var randomclr1;
+        var randomclr2;
+        var randomclr3;
+        var Colors;
+
+        function randomColor(){
+            randomclr1 = Math.floor(Math.random() * 256);
+            randomclr2 = Math.floor(Math.random() * 256);
+            randomclr3 = Math.floor(Math.random() * 256);
+            Colors = `rgb(${randomclr1}, ${randomclr2}, ${randomclr3})`;
+            
+            document.querySelector(".showColor").innerHTML = Colors;
+            document.querySelector("body").style.background = Colors;
+        }
+
+        function copyColor(){
+            navigator.clipboard.writeText(Colors);
+            document.querySelector("main span").classList.add("span_2");
+            setTimeout(() =>{
+                document.querySelector("main span").classList.remove("span_2");
+            }, 800);
+        }
+
+        randomColor();
+    </script>
+</body>
+</html>
